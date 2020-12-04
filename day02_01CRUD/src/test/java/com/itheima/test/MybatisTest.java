@@ -52,14 +52,65 @@ public class MybatisTest {
         }
     }
 
+    /*保存user*/
     @Test
     public void testSaveUser(){
         User user = new User();
-        user.setUsername("张三");
+        user.setUsername("张大美");
         user.setAddress("新文化街");
-        user.setSex("m");
+        user.setSex("男");
         user.setBirthday(new Date());
 
+        System.out.println("执行保存之前"+user);
+        //执行保存之前User{id=null, username='张大美', birthday=Thu Dec 03 20:31:27 EST 2020, sex='男', address='新文化街'}
+
+        /*执行保存方法*/
         userDao.saveUser(user);
+        System.out.println("执行保存之后"+user);
+        //执行保存之后 User{id=51, username='张大美', birthday=Thu Dec 03 20:31:27 EST 2020, sex='男', address='新文化街'}
     }
+
+    /*更新User*/
+    @Test
+    public void testUpdateUser(){
+        User user = new User();
+        user.setId(50);
+        user.setUsername("MyBatis update test");
+        user.setAddress("新文化街");
+        user.setSex("男");
+        user.setBirthday(new Date());
+
+        userDao.updateUser(user);
+    }
+
+    /*删除User*/
+    @Test
+    public void testDeleteUser(){
+        userDao.deleteUser(48);
+    }
+
+    /*查询一个User*/
+    @Test
+    public void testFindOne(){
+      User result = userDao.findById(50);
+      System.out.println(result);
+    }
+
+
+    /*模糊查询操作*/
+    @Test
+    public void testFindByName() {
+        List<User> users = userDao.findByName("王");
+        for(User user : users){
+            System.out.println(user);
+        }
+    }
+
+    /*模糊查询操作*/
+    @Test
+    public void testFindTotal() {
+        int count = userDao.findTotal();
+        System.out.println(count);
+    }
+
 }

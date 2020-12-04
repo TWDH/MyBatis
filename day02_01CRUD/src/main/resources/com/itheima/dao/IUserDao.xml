@@ -3,14 +3,57 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.dao.IUserDao">
+    <!--id：对应的函数名称-->
+    <!--parameterType：参数的类型-->
+    <!--resultType：返回的类型-->
+
     <!--配置查询所有-->
     <select id="findAll" resultType="com.itheima.domain.User">
         select * from user
     </select>
 
-    <!--parameterType 参数的类型-->
-    <!--反射属性-->
+    <!--保存用户-->
     <insert id="saveUser" parameterType="com.itheima.domain.User">
+
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <!-- keyProperty：对应实体类 -->
+        <!-- keyColumn：对应数据库表 -->
+        <!-- order：什么时候执行获取id的操作 -->
+
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        <!-- sql语句 -->
         insert into user(username, address, sex, birthday) values (#{username}, #{address}, #{sex}, #{birthday});
     </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.itheima.domain.User">
+        <!-- sql语句 -->
+        update user set username=#{username}, address=#{address}, sex=#{sex}, birthday=#{birthday} where id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="Integer">
+        /*只有一个参数，写什么(占位符)都可以*/
+        delete from user where id = #{userId}
+    </delete>
+
+    <!-- 根据id查询用户 -->
+    <select id="findById" parameterType="Integer" resultType="com.itheima.domain.User">
+        select * from user where id = #{userId}
+    </select>
+
+    <!-- 根据name查找用户 -->
+    <select id="findByName" parameterType="String" resultType="com.itheima.domain.User">
+--          concat用于拼接字符串，模糊查询需要'%'
+        select * from user where username like concat('%', #{userName}, '%');
+    </select>
+
+    <!-- 获取用户总记录条数 -->
+    <select id="findTotal" resultType="int">
+        select count(id) from user;
+    </select>
+
+
 </mapper>
