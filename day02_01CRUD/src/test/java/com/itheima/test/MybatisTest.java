@@ -1,6 +1,7 @@
 package com.itheima.test;
 
 import com.itheima.dao.IUserDao;
+import com.itheima.domain.QueryVo;
 import com.itheima.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -113,4 +114,20 @@ public class MybatisTest {
         System.out.println(count);
     }
 
+    /*使用QueryVo作为查询条件*/
+    @Test
+    public void testFindByVo() {
+        QueryVo vo = new QueryVo();
+        //创界要查询的 对象+属性
+        User userVo = new User();
+        userVo.setUsername("%王%");
+        //建立vo与user的联系
+        vo.setUser(userVo);
+
+        //执行查询方法
+        List<User> users = userDao.findByName("王");
+        for(User user : users){
+            System.out.println(user);
+        }
+    }
 }
