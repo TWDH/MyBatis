@@ -35,7 +35,7 @@
 
     <!-- 删除用户 -->
     <delete id="deleteUser" parameterType="Integer">
-        /*只有一个参数，写什么(占位符)都可以*/
+        <!--只有一个参数，写什么(占位符)都可以 -->
         delete from user where id = #{userId}
     </delete>
 
