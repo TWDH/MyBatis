@@ -1,7 +1,8 @@
 package com.itheima.test;
 
 import com.itheima.dao.IUserDao;
-import com.itheima.domain.QueryVo;
+import com.itheima.dao.impl.UserDaoImpl;
+
 import com.itheima.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -22,7 +23,6 @@ import java.util.List;
  */
 public class MybatisTest {
     private InputStream in;
-    private SqlSession sqlSession;
     private IUserDao userDao;
 
 
@@ -32,15 +32,11 @@ public class MybatisTest {
         in = Resources.getResourceAsStream("SqlMapConfig.xml");
         //2.创建SqlSessionFactory工厂
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
-        //3.使用工厂生产SqlSession对象
-        sqlSession = factory.openSession();
-        //4.使用SqlSession创建Dao接口的代理对象
-        userDao = sqlSession.getMapper(IUserDao.class);
+        //3.使用工厂对象，创建dao对象
+        userDao = new UserDaoImpl(factory);
     }
     @After
     public void destroy() throws Exception{
-        sqlSession.commit();
-        sqlSession.close();
         in.close();
     }
 
@@ -57,10 +53,10 @@ public class MybatisTest {
     @Test
     public void testSaveUser(){
         User user = new User();
-        user.setUserName("张小美");
-        user.setUserAddress("旧文化街");
-        user.setUserSex("女");
-        user.setUserBirthday(new Date());
+        user.setUsername("张小美");
+        user.setAddress("旧文化街");
+        user.setSex("女");
+        user.setBirthday(new Date());
 
         System.out.println("执行保存之前"+user);
         //执行保存之前User{id=null, username='张大美', birthday=Thu Dec 03 20:31:27 EST 2020, sex='男', address='新文化街'}
@@ -75,11 +71,11 @@ public class MybatisTest {
     @Test
     public void testUpdateUser(){
         User user = new User();
-        user.setUserId(50);
-        user.setUserName("MyBatis update test");
-        user.setUserAddress("新文化街");
-        user.setUserSex("男");
-        user.setUserBirthday(new Date());
+        user.setId(50);
+        user.setUsername("MyBatis update test2");
+        user.setAddress("新文化街2");
+        user.setSex("男");
+        user.setBirthday(new Date());
 
         userDao.updateUser(user);
     }
@@ -87,7 +83,7 @@ public class MybatisTest {
     /*删除User*/
     @Test
     public void testDeleteUser(){
-        userDao.deleteUser(48);
+        userDao.deleteUser(52);
     }
 
     /*查询一个User*/
@@ -114,20 +110,4 @@ public class MybatisTest {
         System.out.println(count);
     }
 
-    /*使用QueryVo作为查询条件*/
-    @Test
-    public void testFindByVo() {
-        QueryVo vo = new QueryVo();
-        //创界要查询的 对象+属性
-        User userVo = new User();
-        userVo.setUserName("%王%");
-        //建立vo与user的联系
-        vo.setUser(userVo);
-
-        //执行查询方法
-        List<User> users = userDao.findByName("王");
-        for(User user : users){
-            System.out.println(user);
-        }
-    }
 }
