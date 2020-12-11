@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.IAccountDao">
+
+    <!-- 定义封装account和user的resultMap-->
+    <resultMap id="accountUserMap" type="account">
+        <!-- 底下sql语句写了，id -> aid -->
+        <id property="id" column="id"></id>
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+
+        <!-- 一对一的关系映射：配置封装user的内容
+            * javaType:返回值类型
+            * select：查询用户的唯一标识
+            * column: 用户根据id查询时，所需要参数的值.findById:哪个Id是谁？就是这个column=uid
+        -->
+        <association property="user" column="uid" javaType="user" select="com.itheima.dao.IUserDao.findById"></association>
+
+    </resultMap>
+
+    <!--配置查询所有-->
+    <select id="findAll" resultMap="accountUserMap">
+        select * from account;
+    </select>
+
+    <!-- 根据用户id查询账户列表 -->
+    <select id="findAccountByUid" resultType="account">
+        select * from account where uid = #{uid}
+    </select>
+
+</mapper>
