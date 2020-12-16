@@ -17,6 +17,7 @@
 <!-- 启动服务器即创建DispatcherServlet对象  -->
     <load-on-startup>1</load-on-startup>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
