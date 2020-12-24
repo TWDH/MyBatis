@@ -25,7 +25,7 @@ public class HelloController {
      *  params：必须给方法一个参数（在请求页面?username=zhangsan），否则不能执行
      * @return
      */
-    @RequestMapping(value = "/testRequestMapping", method = {RequestMethod.POST})
+    @RequestMapping(value = "/testRequestMapping")
     public String testRequestMapping() {
         System.out.println("测试RequestMapping注解");
         return "success";
