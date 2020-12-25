@@ -23,9 +23,20 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 配置自定义类型转换器-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <!--引入自己写的类StringToDateConverter-->
+        <property name="converters">
+            <set>
+                <bean class="cn.itcast.utils.StringToDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
     <!-- 开启SpringMVC框架注解的支持-->
     <!--
-        默认将HandlerMapping映射器和HandlerAdapter处理器适配器 配置成功
+        * 默认将HandlerMapping映射器和HandlerAdapter处理器适配器 配置成功
+        * conversionService是上面配置的类
      -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
 </beans>

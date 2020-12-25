@@ -1,10 +1,20 @@
 package cn.itcast.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private String uname;
     private Integer age;
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getUname() {
         return uname;
@@ -27,6 +37,7 @@ public class User implements Serializable {
         return "User{" +
                 "uname='" + uname + '\'' +
                 ", age=" + age +
+                ", date=" + date +
                 '}';
     }
 }
