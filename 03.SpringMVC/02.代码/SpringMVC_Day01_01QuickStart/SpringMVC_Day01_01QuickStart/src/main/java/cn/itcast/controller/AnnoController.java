@@ -2,6 +2,7 @@ package cn.itcast.controller;
 
 import cn.itcast.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -71,5 +72,17 @@ public class AnnoController {
         user.setAge(20);
         user.setDate(new Date());
         map.put("key", user);
+    }
+
+    /**
+     * SessionAttributes注解
+     * @return
+     */
+    @RequestMapping("/testSessionAttributes")
+    public String testSessionAttributes(Model model) {
+        System.out.println("SessionAttributes: ");
+        // 底层会存储到request域对象当中
+        model.addAttribute("msg", "Find a job");
+        return "success";
     }
 }

@@ -38,5 +38,7 @@
     <input type="submit" value="提交"/>
 </form>
 
+<a href="anno/testSessionAttributes">testSessionAttributes</a>
+
 </body>
 </html>
