@@ -14,6 +14,7 @@
     <%-- EL表达式，request域的map集合 --%>
     <%-- 所有request的集合 --%>
     ${requestScope.msg}
+
     ${sessionScope}
 </head>
 <body>

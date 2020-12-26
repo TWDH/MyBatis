@@ -3,13 +3,16 @@ package cn.itcast.controller;
 import cn.itcast.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Date;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/anno")
+@SessionAttributes(value = {"msg"})
 public class AnnoController {
     @RequestMapping("/testRequestParam")
     public String testRequestParam(@RequestParam(name = "name") String username) {
@@ -80,9 +83,25 @@ public class AnnoController {
      */
     @RequestMapping("/testSessionAttributes")
     public String testSessionAttributes(Model model) {
-        System.out.println("SessionAttributes: ");
+        System.out.println("SessionAttributes");
         // 底层会存储到request域对象当中
         model.addAttribute("msg", "Find a job");
+        return "success";
+    }
+
+    @RequestMapping("/getSessionAttributes")
+    public String getSessionAttributes(ModelMap model) {
+        System.out.println("getSessionAttributes");
+        // 底层会存储到request域对象当中
+        String msg = (String) model.get("msg");
+        System.out.println("取出了："+msg);
+        return "success";
+    }
+
+    @RequestMapping("/delSessionAttributes")
+    public String delSessionAttributes(SessionStatus status) {
+        System.out.println("delSessionAttributes");
+        status.setComplete();
         return "success";
     }
 }

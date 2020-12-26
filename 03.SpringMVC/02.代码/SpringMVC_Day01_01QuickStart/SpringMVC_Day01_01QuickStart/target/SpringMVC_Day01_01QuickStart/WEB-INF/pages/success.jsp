@@ -12,7 +12,10 @@
     <h3>入门成功</h3>
 
     <%-- EL表达式，request域的map集合 --%>
-    ${requestScope}
+    <%-- 所有request的集合 --%>
+    ${requestScope.msg}
+
+    ${sessionScope}
 </head>
 <body>
 
