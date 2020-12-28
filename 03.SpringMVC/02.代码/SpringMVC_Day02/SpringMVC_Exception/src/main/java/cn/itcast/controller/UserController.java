@@ -1,6 +1,7 @@
 package cn.itcast.controller;
 
 import cn.itcast.domain.User;
+import cn.itcast.exception.SysException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +22,17 @@ import java.util.UUID;
 public class UserController {
 
     @RequestMapping("/testException")
-    public String testException() {
+    public String testException() throws SysException{
         System.out.println("testException执行了");
+        //模拟异常
+        try {
+            int a = 10/0;
+        } catch (Exception e) {
+            //打印异常信息
+            e.printStackTrace();
+            //抛出自定义异常信息
+            throw new SysException("查询用户出现错误。。。");
+        }
         return "success";
     }
-
 }
