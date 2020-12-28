@@ -28,4 +28,16 @@ public class AccountController {
         model.addAttribute("list", list);
         return "list";
     }
+
+    /**
+     * 保存
+     * @param account
+     * @return
+     */
+    @RequestMapping("/save")
+    public String save(Account account) {
+        //account会自动封装
+        accountService.saveAccount(account);
+        return "redirect:findAll";
+    }
 }
