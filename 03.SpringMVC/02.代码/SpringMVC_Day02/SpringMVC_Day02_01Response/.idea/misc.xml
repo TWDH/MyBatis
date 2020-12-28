@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../SpringMVC_04_Intercepter" />
     <file type="web" url="file://$PROJECT_DIR$" />
     <file type="web" url="file://$PROJECT_DIR$/../SpringMVC_Exception" />
     <file type="web" url="file://$PROJECT_DIR$/../SpringMVC_fileUpload" />
@@ -14,6 +15,7 @@
         <option value="$PROJECT_DIR$/../SpringMVC_fileUpload/pom.xml" />
         <option value="$PROJECT_DIR$/../SpringMVC_Exception/pom.xml" />
         <option value="$PROJECT_DIR$/../SpringMVC_fileUploadServer/pom.xml" />
+        <option value="$PROJECT_DIR$/../SpringMVC_04_Intercepter/pom.xml" />
       </list>
     </option>
   </component>

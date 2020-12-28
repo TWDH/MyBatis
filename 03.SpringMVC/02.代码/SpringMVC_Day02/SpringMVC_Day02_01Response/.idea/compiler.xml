@@ -9,6 +9,7 @@
         <module name="SpringMVC_Day02_01Response" />
         <module name="SpringMVC_Exception" />
         <module name="SpringMVC_fileUpload" />
+        <module name="SpringMVC_04_Intercepter" />
         <module name="SpringMVC_fileUploadServer" />
       </profile>
     </annotationProcessing>
