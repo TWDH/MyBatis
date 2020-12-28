@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="SpringMVC_Day2_01_Response" />
         <module name="SpringMVC_Day01_01QuickStart" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SpringMVC_Day01_01QuickStart" target="1.8" />
+      <module name="SpringMVC_Day2_01_Response" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
