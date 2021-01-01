@@ -32,6 +32,7 @@ public class UserServiceImpl implements IUserService {
         }
         //处理自己的用户对象，封装成UserDetails
         // User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(), getAuthority(userInfo.getRoles()));
+        /*状态，权限 双控制*/
         User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true,true, true, true, getAuthority(userInfo.getRoles()));
 
         return user;
@@ -46,4 +47,9 @@ public class UserServiceImpl implements IUserService {
         return list;
     }
 
+    //user查询数据库
+    @Override
+    public List<UserInfo> findAll() throws Exception {
+        return userDao.findAll();
+    }
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 
 public interface IUserDao {
     //username与下方对应，并且是从UserServiceImpl中传过来的
@@ -20,4 +22,7 @@ public interface IUserDao {
             @Result(property = "roles",column = "id",javaType = java.util.List.class,many = @Many(select = "com.itheima.ssm.dao.IRoleDao.findRoleByUserId"))
     })
     public UserInfo findByUsername(String username) throws Exception;
+
+    @Select("select * from users")
+    List<UserInfo> findAll() throws Exception;
 }
