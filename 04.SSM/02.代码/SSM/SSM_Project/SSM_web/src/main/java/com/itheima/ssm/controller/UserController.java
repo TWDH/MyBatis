@@ -16,8 +16,16 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    //用户添加
+    @RequestMapping("/save.do")
+    public String save(UserInfo userInfo) throws Exception {
+        userService.save(userInfo);
+        return "redirect:findAll.do";
+    }
+
     @RequestMapping("/findAll.do")
     public ModelAndView findAll() throws Exception {
+
         ModelAndView mv = new ModelAndView();
         List<UserInfo> userList = userService.findAll();
         mv.addObject("userList", userList);
