@@ -1,5 +1,6 @@
 package com.itheima.ssm.dao;
 
+import com.itheima.ssm.domain.Role;
 import com.itheima.ssm.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 
@@ -49,5 +50,24 @@ public interface IUserDao {
      * @return
      * @throws Exception
      */
+    @Select("select * from users where id = #{id}")
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "phoneNum", column = "phoneNum"),
+            @Result(property = "status", column = "status"),
+            @Result(property = "roles",column = "id",javaType = java.util.List.class,many = @Many(select = "com.itheima.ssm.dao.IRoleDao.findRoleByUserId"))
+    })
     UserInfo findById(int id) throws Exception;
+
+
+    //查询其他可用的role
+    @Select("select * from role where id not in (select roleId from users_role where userId = #{userId})")
+    List<Role> findOtherRoles(int userId);
+
+    //向user添加role
+    @Insert("insert into users_role (userId, roleId) values(#{userId}, #{roleId})")
+    void addRoleToUser(@Param("userId") int userId, @Param("roleId") int roleId);
 }

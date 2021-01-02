@@ -124,7 +124,7 @@ STATUS INT
 
 -- 角色表
 CREATE TABLE role(
-id INT PRIMARY KEY,
+id AUTO_INCREMENT INT PRIMARY KEY,
 roleName VARCHAR(50) ,
 roleDesc VARCHAR(50)
 )
@@ -132,8 +132,8 @@ roleDesc VARCHAR(50)
 
 -- 用户角色关联表
 CREATE TABLE users_role(
-userId int,
-roleId int,
+userId INT,
+roleId INT,
 PRIMARY KEY(userId,roleId),
 FOREIGN KEY (userId) REFERENCES users(id),
 FOREIGN KEY (roleId) REFERENCES role(id)
@@ -141,18 +141,21 @@ FOREIGN KEY (roleId) REFERENCES role(id)
 
 -- 资源权限表
 CREATE TABLE permission(
-id int PRIMARY KEY,
+id INT AUTO_INCREMENT PRIMARY KEY,
 permissionName VARCHAR(50) ,
 url VARCHAR(50)
 )
 
 -- 角色权限关联表
 CREATE TABLE role_permission(
-permissionId int,
-roleId int,
+permissionId INT,
+roleId INT,
 PRIMARY KEY(permissionId,roleId),
 FOREIGN KEY (permissionId) REFERENCES permission(id),
 FOREIGN KEY (roleId) REFERENCES role(id)
 )
 
 -- select * from role where id in (select roleId from users_role where userId=1)
+-- select * from users;
+-- select * from role where id in (select roleId from users_role where userId=1)
+-- select * from permission 

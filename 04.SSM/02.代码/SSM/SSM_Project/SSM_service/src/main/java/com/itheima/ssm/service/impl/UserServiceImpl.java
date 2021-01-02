@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("userService")
+@Service("userService") //springSecurity中的配置
 @Transactional
 public class UserServiceImpl implements IUserService {
 
@@ -65,8 +65,23 @@ public class UserServiceImpl implements IUserService {
         userDao.save(userInfo);
     }
 
+    //通过id查询用户
     @Override
     public UserInfo findById(int id) throws Exception {
         return userDao.findById(id);
+    }
+
+    //查詢其他可以添加的角色
+    @Override
+    public List<Role> findOtherRoles(int userId) {
+        return userDao.findOtherRoles(userId);
+    }
+
+    //向user添加role
+    @Override
+    public void addRoleToUser(int userId, int[] roleIds) {
+        for (int roleId : roleIds) {
+            userDao.addRoleToUser(userId, roleId);
+        }
     }
 }
