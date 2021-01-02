@@ -23,6 +23,7 @@ public class UserController {
         return "redirect:findAll.do";
     }
 
+    //查询所有用户
     @RequestMapping("/findAll.do")
     public ModelAndView findAll() throws Exception {
 
@@ -30,6 +31,14 @@ public class UserController {
         List<UserInfo> userList = userService.findAll();
         mv.addObject("userList", userList);
         mv.setViewName("user-list");
+        return mv;
+    }
+
+    //查询指定id的用户
+    @RequestMapping("/findById.do")
+    public ModelAndView findById(int id) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        UserInfo userInfo = userService.findById(id);
         return mv;
     }
 }

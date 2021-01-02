@@ -37,7 +37,7 @@ public class UserServiceImpl implements IUserService {
         //处理自己的用户对象，封装成UserDetails
         // User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(), getAuthority(userInfo.getRoles()));
         /*状态，权限 双控制*/
-        User user = new User(userInfo.getUsername(), "{noop}" + userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true,true, true, true, getAuthority(userInfo.getRoles()));
+        User user = new User(userInfo.getUsername(), userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true,true, true, true, getAuthority(userInfo.getRoles()));
 
         return user;
     }
@@ -63,5 +63,10 @@ public class UserServiceImpl implements IUserService {
         //对密码进行加密处理
         userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
         userDao.save(userInfo);
+    }
+
+    @Override
+    public UserInfo findById(int id) throws Exception {
+        return userDao.findById(id);
     }
 }
