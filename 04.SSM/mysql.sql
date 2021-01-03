@@ -4,7 +4,7 @@ USE ssm
 -- 商品
 CREATE TABLE product
 (
-id INT PRIMARY KEY ,
+id INT AUTO_INCREMENT PRIMARY KEY ,
 productNum VARCHAR(50) UNIQUE NOT NULL,
 productName VARCHAR(50),
 cityName VARCHAR(50),
@@ -21,7 +21,7 @@ INSERT INTO product (id, productnum, productname, cityname, departuretime, produ
 
 -- 会员
 CREATE TABLE member(
-       id INT PRIMARY KEY,
+       id INT AUTO_INCREMENT PRIMARY KEY,
        NAME VARCHAR(20),
        nickname VARCHAR(20),
        phoneNum VARCHAR(20),
@@ -32,7 +32,7 @@ VALUES (1, '张三', '小三', '18888888888', 'zs@163.com');
 
 -- 旅行
 CREATE TABLE traveller(
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   NAME VARCHAR(20),
   sex VARCHAR(20),
   phoneNum VARCHAR(20),
@@ -48,7 +48,7 @@ VALUES (2, '张小龙', '男', '15555555555', 0,'987654321123456789', 1);
 
 -- 订单
 CREATE TABLE orders(
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   orderNum VARCHAR(20) NOT NULL UNIQUE,
   orderTime TIMESTAMP,
   peopleCount INT,
@@ -153,6 +153,17 @@ roleId INT,
 PRIMARY KEY(permissionId,roleId),
 FOREIGN KEY (permissionId) REFERENCES permission(id),
 FOREIGN KEY (roleId) REFERENCES role(id)
+)
+
+-- AOP log
+CREATE TABLE sysLog(
+id INT AUTO_INCREMENT PRIMARY KEY,
+visitTime TIMESTAMP,
+username VARCHAR(50),
+ip VARCHAR(30),
+url VARCHAR(50),
+executionTime INT,
+method VARCHAR(200)
 )
 
 -- select * from role where id in (select roleId from users_role where userId=1)
